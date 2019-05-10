@@ -1,4 +1,4 @@
-
+//We dont need to add the velocity to every single y value just one and then reassign the other values
 
 class Matrix { // generatea couple random types of matrices in the future to minimize computation and also create better matrice class with better data structure like hashmap
     
@@ -29,9 +29,11 @@ class Cylon_Char {
     
     constructor() {
        // console.log("hello world");
-        this.x = window.innerWidth * Math.random();
-        this.y = window.innerHeight * Math.random();
-        this.velocity = 3 * Math.random() + 2;
+        this.seed_x = Math.random();
+        this.seed_y = Math.random();
+        this.x = window.innerWidth * this.seed_x;
+        this.y = window.innerHeight * this.seed_y;
+        this.velocity = 3 * Math.random() + 3;
         this.char_size = 8;
         this.dot_diam = 5;
         this.padding = 2;
@@ -68,12 +70,11 @@ class Cylon_Char {
     // otherwise it resets the screen
     update() { //TODO Error with a dot that does not update properly and does not move in some cases
         for (var index = 0; index < this.coords.length; index++) {
-            if (this.coords[0][1] < window.innerHeight) {
-                this.coords[index][1] = this.coords[index][1] + this.velocity;
+            if (this.coords[index][1] < window.innerHeight + this.char_size * (this.dot_diam + this.padding)) {
+                this.coords[index][1] += this.velocity;
             } else {
                 this.reset();
             }
-            this.x = this.coords[0][0];
             this.y = this.coords[0][1];
         }
     }
@@ -95,9 +96,11 @@ class Cylon_Char {
 }
 
 var dataStream = new Array();
-var amount = 1;
+var amount = 50;
 
 function setup() {
+    var fr  = 30;
+    frameRate(fr);
     createCanvas(window.innerWidth, window.innerHeight);
     for (var count = 0; count < amount; count++) {
         var c = new Cylon_Char()
@@ -106,16 +109,22 @@ function setup() {
     
 }
 
-
-
-
 function draw() {
     background(0);
-    //var r = new Array(1);
     for (var index = 0; index < dataStream.length; index++) {
         dataStream[index].draw();
-    }
-    
-    //r.push(c);
-    
+    }    
 }
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    //Scale canvas appropriatetly new x/old x = new size/old size
+    for (var index = 0; index < dataStream.length; index++) {
+        var old_width = dataStream[index].x/dataStream[index].seed_x;
+        var old_height = dataStream[index].y/dataStream[index].seed_y;
+        dataStream[index].x = dataStream[index].x * (window.innerWidth/old_width);
+        dataStream[index].y = dataStream[index].y * (window.innerHeight/old_height);
+        dataStream[index].coords = dataStream[index].createCoordSystem();
+    }   
+    
+} 
