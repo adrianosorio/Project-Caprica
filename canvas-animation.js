@@ -29,6 +29,7 @@ class Cylon_Char {
     
     constructor() {
        // console.log("hello world");
+        this.color_char = color(236, 19, 19);
         this.seed_x = Math.random();
         this.seed_y = Math.random();
         this.x = window.innerWidth * this.seed_x;
@@ -83,8 +84,7 @@ class Cylon_Char {
     // Draws the dots on the canvas
     draw() {
         for (var index = 0; index < this.coords.length; index++) {
-            let c = color(255, 204, 0); // Define color 'c'
-            fill(c); // Use color variable 'c' as fill color
+            fill(this.color_char); // Use color variable 'c' as fill color
             noStroke();
             if (this.m.mat[Math.floor(index/this.char_size)][index%this.char_size] == 1) {
                 circle(this.coords[index][0], this.coords[index][1], this.dot_diam);
