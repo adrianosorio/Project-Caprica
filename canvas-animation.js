@@ -55,7 +55,7 @@ class Cylon_Char {
                 if (count < Math.pow(this.char_size, 2)) {
                     coordsys[count] = [x_c, y_c];
                     count++;  
-                }//714-559-5299
+                }
             }
         }
         return coordsys;
