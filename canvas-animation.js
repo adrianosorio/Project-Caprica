@@ -1,4 +1,5 @@
 //We dont need to add the velocity to every single y value just one and then reassign the other values
+//Error occuring when we reset
 
 class Matrix { // generatea couple random types of matrices in the future to minimize computation and also create better matrice class with better data structure like hashmap
     
@@ -14,7 +15,7 @@ class Matrix { // generatea couple random types of matrices in the future to min
         for (var r = 0; r < this.row; r++) {
             var dots_r = new Array(this.row);
             for (var c = 0; c < this.col; c++) {
-                dots_r[c] = (Math.random() > 0.50 ? 1 : 0);
+                dots_r[c] = (Math.random() > 0.60 ? 1 : 0);
             }
             dots[r] = dots_r;
         }
@@ -32,6 +33,7 @@ class Cylon_Char {
         this.color_char = color(236, 19, 19);
         this.seed_x = Math.random();
         this.seed_y = Math.random();
+        // X and Y reporesent the top of the cylon char which is similar to position [0][0] in the array
         this.x = window.innerWidth * this.seed_x;
         this.y = window.innerHeight * this.seed_y;
         this.velocity = 3 * Math.random() + 3;
@@ -52,8 +54,8 @@ class Cylon_Char {
                 var x_c = x_axis * (this.dot_diam + this.padding) + this.x; 
                 if (count < Math.pow(this.char_size, 2)) {
                     coordsys[count] = [x_c, y_c];
-                    count++;
-                }
+                    count++;  
+                }//714-559-5299
             }
         }
         return coordsys;
@@ -61,10 +63,9 @@ class Cylon_Char {
     
     // Resets the coordinate system so that it starts slightly above the top of the canvas
     reset() {
-        this.y = 0;
-        for (var index = 0; index < this.coords.length; index++) {
-             this.coords[index][1] = this.coords[index][1] - window.innerHeight - this.char_size*(this.dot_diam + this.padding);
-        }
+        // (my current y coord)(not constant) - (The window height) - (The size of the character) = (where I should reset up at)
+        this.y = this.coords[0][1] - window.innerHeight - this.char_size*(this.dot_diam + this.padding);
+        this.coords = this.createCoordSystem();
     }
     
     // Updates the coordinate system by a translation as long as the cylon char has not complete left the screen
@@ -75,9 +76,9 @@ class Cylon_Char {
                 this.coords[index][1] += this.velocity;
             } else {
                 this.reset();
-            }
-            this.y = this.coords[0][1];
+            }    
         }
+        this.y = this.coords[0][1];
     }
     
 
