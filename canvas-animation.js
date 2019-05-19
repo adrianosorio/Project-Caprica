@@ -20,8 +20,7 @@ class Matrix { // generatea couple random types of matrices in the future to min
             dots[r] = dots_r;
         }
         return dots;
-    }
-    
+    }  
 }
 
 //Draw/Update/Create a Cylon Character
@@ -100,9 +99,10 @@ var dataStream = new Array();
 var amount = 50;
 
 function setup() {
-    var fr  = 30;
+    var fr  = 40;
     frameRate(fr);
-    createCanvas(window.innerWidth, window.innerHeight);
+    var cv = createCanvas(window.innerWidth-17, window.innerHeight);
+    cv.id("canvas");
     for (var count = 0; count < amount; count++) {
         var c = new Cylon_Char()
         dataStream.push(c);
