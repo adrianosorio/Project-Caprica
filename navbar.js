@@ -4,43 +4,31 @@ var nav = document.getElementById("cylon-eye");
 $(document).ready(function() { //To animate make sure to define position type
     var tab = $("li");
     var eye = $("#guide")
-    var speed = 100;
+    var speed_highlight = 100;
+    var speed_hover = 350;
+    var initial_offset = $("li.active").offset();
+    eye.animate({top: initial_offset.top}, 0);
+    
+    
     //When we hover over create border bottom
     tab.hover(function() {
-        $(this).animate({borderBottomColor: "#fe0606", borderBottomStyle: "solid", borderBottomWidth: "5px"}, speed);
+        $(this).animate({borderBottomColor: "#fe0606", borderBottomStyle: "solid", borderBottomWidth: "5px"}, speed_highlight);
     }, function() {
-        $(this).animate({borderBottomWidth: "0px"}, speed);
+        $(this).animate({borderBottomWidth: "0px"}, speed_highlight);
     });
     
     //When we hover over record pos in y direction and have the guide travel to that y-pos
     tab.mouseenter(function(){
-        //find coordinate
-        var width_percent = 0.3; //From css-mainn file guide height
-        var shift_y = window.innerHeight * width_percent;
-        var pos_y = $(this).position().top;
-        var sum = pos_y + shift_y;
-        sum = sum+"px";
-        console.log("test " + sum);
-        $("#guide").animate({top: "164px"}, "slow"); 
+        //First thing is to grab the position of the mouse but in particular the position of the box
+        var offset = $(this).offset();
+        eye.stop(true, false);//stopped bad queuing
+        eye.animate({top: offset.top}, speed_hover);
     });
     
-    /*
-$(this).mouseenter(function() {
-            var pos = $(this).position().top;
-            console.log(pos);
-      */      //$("#guide").animate({position: pos}, "slow"); 
-    // What are we hovering over and what is its position
+    tab.mouseleave(function(){
+        var offset = $("li.active").offset();
+        eye.stop(true, false);//stopped bad queueing
+        eye.animate({top: offset.top}, speed_hover);
+    });
     
 });
-
-/*
-    mouseenter(function(){
-        //find coordinate
-        var width_percent = 0.3; //From css-mainn file guide height
-        var shift_y = window.innerHeight * width_percent;
-        var pos_y = $(this).position().top;
-        var sum = pos_y + shift_y;
-        console.log("test " + sum);
-        $("#guide").animate({top: sum}, "slow"); 
-    });
-*/
