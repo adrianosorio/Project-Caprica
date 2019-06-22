@@ -8,7 +8,9 @@ $(document).ready(function() { //To animate make sure to define position type
     var speed_hover = 350;
     var initial_offset = $("li.active").offset();
     eye.animate({top: initial_offset.top}, 0);
-    
+    $("body").hide().fadeIn(2000);
+    //Adding animation to make the greeting fade into the page
+    $("#greeting").hide().fadeIn(3000);
     
     //When we hover over create border bottom
     tab.hover(function() {
