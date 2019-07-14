@@ -3,7 +3,9 @@
     <head>
         <title>Home</title>
         <meta charset = "UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="main-css.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="canvas-animation.js"></script>
@@ -21,11 +23,15 @@
                 <li><a href = "#">Involvement</a></li> <!--Cylon Characters that drop down for js animation--> 
             </ul>
         </div>
-        <div id = "greeting">
-            <span class = "spec-heading">Welcome!</span>
-            <p id = "greeting-message">
-                Learn about my passions, interests, and projects. If you want to get in contact please do so.
-            </p><!--Welcome should change into different language greetings-->
+        <div id = "greeting" class = "container">
+            <div class = "row">
+                <span class = "spec-heading" class = "col-sm-12">Welcome!</span>
+            </div>
+            <div class = "row">
+                <p id = "greeting-message" class = "col-sm-12">
+                    Learn about my passions, interests, and projects. If you want to get in contact please do so.
+                </p><!--Welcome should change into different language greetings-->
+            </div>
         </div>
     </body>
 </html>
